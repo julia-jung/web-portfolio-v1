@@ -20,7 +20,10 @@ h4 {
     color: #303030;
     font-weight: 400;
     margin-bottom: 30px;
-}  
+} 
+a {
+    text-decoration: none !important;
+}
 .jumbotron {
     background-image: url("../img/main2.jpg");
     height:600px !important;

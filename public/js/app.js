@@ -51,12 +51,25 @@ $(document).ready(function(){
     $("#sendBtn").on('click', () => {
       const name = $("#name").val();
       const email = $("#email").val();
-      const comments = $("#comments").val();
+      const text = $("#comments").val();
+      const from = name + ' <' + email + '>';
 
       if(email == "" || comments == "") {
          return alert("메일주소와 내용을 입력해주세요");
       }
+
+      $("#sendBtn").text('Sending...').attr('disabled', true);
       
+      fetch("/mail?from=" + from + "&text=" + text).then((response) => {
+        response.json().then((data) => {
+          if(data.error) {
+            $("#sendBtn").text('전송실패..!').css({'background':'red', 'color':'white'});
+          }else {
+            console.log(data.response);
+            $("#sendBtn").text('전송 완료!').css({'background':'green', 'color':'white'});
+          }
+        });
+      });
         
 
     });
