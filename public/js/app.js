@@ -63,6 +63,7 @@ $(document).ready(function(){
       fetch("/mail?from=" + from + "&text=" + text).then((response) => {
         response.json().then((data) => {
           if(data.error) {
+            console.log(data.error);
             $("#sendBtn").text('전송실패..!').css({'background':'red', 'color':'white'});
           }else {
             console.log(data.response);
