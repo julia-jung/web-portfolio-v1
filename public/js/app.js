@@ -37,6 +37,37 @@ $(document).ready(function(){
         $(".navbar").css("background", "transparent");
       }
     });
+
+    getWeather();
+
+    $("#address").on('change', () => {
+      $("#location").text("");
+      $("#summary").text("Loading...");
+      $("#temperature").text("");
+      $("#max").text("");
+      $("#min").text("");
+      $("#rain").text("");
+      fetch('/weather?address=' + $("#address").val()).then((response) => {
+        response.json().then(({ error, forecast, location }) => {
+          if(error) {
+            $("#location").text("");
+            $("#summary").text(error).css('font-size', '13px');
+            $("#temperature").text("");
+            $("#max").text("");
+            $("#min").text("");
+            $("#rain").text("");
+          }else {
+            $("#location").html('<i class="fas fa-map-marker-alt"></i>' + location);
+            $("#summary").text(forecast.summary);
+            $("#temperature").html(forecast.temperature + '<i class="fas fa-temperature-high" style="orange"></i>');
+            $("#max").html(forecast.max + '<i class="fas fa-long-arrow-alt-up" style="color:red"></i> /');
+            $("#min").html(forecast.min + '<i class="fas fa-long-arrow-alt-down" style="color:blue"></i>');
+            $("#rain").html('<i class="fas fa-tint" style="color:white"></i>' + forecast.rain + '%');
+          }
+        });
+      });
+    });
+
   
     $("#miniCodeBtn").on('click', () => {
       location.href="https://github.com/Julia8956/tasteOfWork";
@@ -76,3 +107,31 @@ $(document).ready(function(){
     });
 
 });
+
+const getWeather = () => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+    $("#summary").text("Loading...");
+    console.log(lat, lng);
+    fetch('/weather?address=geolocation&lat=' + lat + '&lng=' + lng).then((response) => {
+      response.json().then(({ error, forecast, location }) => {
+        if(error) {
+          $("#location").text("");
+          $("#summary").text(error).css('font-size', '13px');
+          $("#temperature").text("");
+          $("#max").text("");
+          $("#min").text("");
+          $("#rain").text("");
+        }else {
+          $("#location").html('<i class="fas fa-map-marker-alt"></i>' + location);
+          $("#summary").text(forecast.summary);
+          $("#temperature").html(forecast.temperature + '<i class="fas fa-temperature-high" style="orange"></i>');
+          $("#max").html(forecast.max + '<i class="fas fa-long-arrow-alt-up" style="color:red"></i> /');
+          $("#min").html(forecast.min + '<i class="fas fa-long-arrow-alt-down" style="color:blue"></i>');
+          $("#rain").html('<i class="fas fa-tint" style="color:white"></i>' + forecast.rain + '%');
+        }
+      });
+    });
+  });
+}

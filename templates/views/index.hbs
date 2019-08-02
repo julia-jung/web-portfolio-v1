@@ -12,6 +12,7 @@
   
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.10.0/js/all.js" data-auto-replace-svg="nest"></script>
 </head>
 <body id="homePage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -39,7 +40,17 @@
   </nav>
 
   <div class="jumbotron text-center">
-    <h1>MINJI JUNG</h1> 
+    <div class="text-right" id="weatherArea">
+      <i class="fas fa-cloud-sun" style="color:orange"></i>
+      <span class="">Weather</span>&nbsp;<span class="" id="location"></span>
+      <input type="text" class="input weather" id="address" placeholder="search other place">
+      <p class="weather" id="summary"></p>
+      <p class="weather"><span class="weather" id="temperature"></span>&nbsp;
+      <span id="max"></span>
+      <span id="min"></span>&nbsp;
+      <span id="rain"></span></p>
+    </div>
+    <h1>MINJI JUNG</h1>
     <p>Front & Back-End Web Developer</p>
     <button class="btn btn-default btn-sm">
       <a href="/file/resume_julia.pdf" target="_blank">RESUME</a>

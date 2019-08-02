@@ -4,6 +4,7 @@ body {
     color: #818181;
 }
 h1 {
+    margin:0;
     text-shadow: 1px 1px 20px #fff;
     /* text-decoration:underline; */
 }
@@ -24,6 +25,11 @@ h4 {
 a {
     text-decoration: none !important;
 }
+.weather {
+    font-size:13px !important;
+    margin:0 !important;
+    color:black;
+}
 .jumbotron {
     background-image: url("../img/main2.jpg");
     height:600px !important;
@@ -32,7 +38,7 @@ a {
     background-size: cover;
     margin:0;
     color: #fff;
-    padding: 100px 25px;
+    padding: 60px 25px;
     font-family: Montserrat, sans-serif;
 }
 .logo {
