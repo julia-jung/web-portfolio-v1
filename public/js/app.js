@@ -38,7 +38,7 @@ $(document).ready(function(){
       }
     });
 
-    getWeather();
+    //getWeather();
 
     $("#address").on('change', () => {
       $("#location").text("");
@@ -79,10 +79,32 @@ $(document).ready(function(){
       location.href="https://github.com/Julia8956/travelInterface";
     });
 
+    $(".card").on('click', function() {
+      var img;
+      console.log($(this).text().charAt(0));
+      switch($(this).text().charAt(0)) {
+        case '1': img = '/img/ant.jpg'; break;
+        case '2': img = '/img/bunny.jpg'; break;
+        case '3': img = '/img/snake.jpg'; break;
+        case '4': img = '/img/tiger.jpg'; break;
+        case '5': img = '/img/dragon.jpg'; break;
+      }
+      $("#myCard").prop('src', img);
+    });
+
+
+
     $("#sendBtn").on('click', () => {
       const name = $("#name").val();
       const email = $("#email").val();
-      const text = $("#comments").val();
+      const origin = $("#comments").val();
+      // for(var i = 0; i < text.length; i++) {
+      //   if(text.charAt(i) == '\n') {
+      //     text.replace(/\s/, );
+      //   }
+      // }
+      const text = origin.replace(/\s+/g, " ").trim();
+      console.log(text);
       const from = name + ' <' + email + '>';
 
       if(email == "" || comments == "") {
