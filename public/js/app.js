@@ -1,24 +1,16 @@
 $(document).ready(function(){
-    // Add smooth scrolling to all links in navbar + footer link
+
     $(".navbar a, footer a[href='#homePage']").on('click', function(event) {
-      // Make sure this.hash has a value before overriding default behavior
       if (this.hash !== "") {
-        // Prevent default anchor click behavior
         event.preventDefault();
-  
-        // Store hash
         var hash = this.hash;
-  
-        // Using jQuery's animate() method to add smooth page scroll
-        // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
         $('html, body').animate({
           scrollTop: $(hash).offset().top
         }, 900, function(){
-     
-          // Add hash (#) to URL when done scrolling (default click behavior)
+
           window.location.hash = hash;
         });
-      } // End if
+      } 
     });
     
     $(window).scroll(function() {
@@ -38,7 +30,7 @@ $(document).ready(function(){
       }
     });
 
-    //getWeather();
+    getWeather();
 
     $("#address").on('change', () => {
       $("#location").text("");
@@ -79,30 +71,19 @@ $(document).ready(function(){
       location.href="https://github.com/Julia8956/travelInterface";
     });
 
-    $(".card").on('click', function() {
-      var img;
-      console.log($(this).text().charAt(0));
-      switch($(this).text().charAt(0)) {
-        case '1': img = '/img/ant.jpg'; break;
-        case '2': img = '/img/bunny.jpg'; break;
-        case '3': img = '/img/snake.jpg'; break;
-        case '4': img = '/img/tiger.jpg'; break;
-        case '5': img = '/img/dragon.jpg'; break;
-      }
-      $("#myCard").prop('src', img);
+    $("#playBtn, #playAgainBtn").on('click', () => {
+      let round = 1;
+      play(round++);
+      $("#nextRoundBtn").on('click', () => {
+        if(round <= 3) play(round++);
+      });
     });
-
 
 
     $("#sendBtn").on('click', () => {
       const name = $("#name").val();
       const email = $("#email").val();
       const origin = $("#comments").val();
-      // for(var i = 0; i < text.length; i++) {
-      //   if(text.charAt(i) == '\n') {
-      //     text.replace(/\s/, );
-      //   }
-      // }
       const text = origin.replace(/\s+/g, " ").trim();
       console.log(text);
       const from = name + ' <' + email + '>';
@@ -156,4 +137,125 @@ const getWeather = () => {
       });
     });
   });
+}
+let round1;
+let round2;
+let round3;
+
+const play = (round, callback) => {
+  const cards = [1, 2, 3, 4, 5];
+  const enemy = [1, 2, 3, 4, 5];
+  let myScore = 0;
+  let enemyScore = 0;
+  let count = 0;
+  $("#cardTitle").text('Choose Your Card!').css('color', 'red');
+  $("#nextRoundBtn, #playAgainBtn").hide();
+  $("#playBtn").text('Start!').css('background', 'red');
+  $("#round").text('Round ' + round).css({'color':'#B49BFF', 'transform-scale':'scale(1.4, 1.4)', 'transition-duration':'2s'});
+  //$("#round").text('Round' + round);
+  $("#result").show();
+  $("#myScore, #enemyScore").text(0);
+  $("#myResult, #enemyResult, #roundResult").text('');
+  $('.card').css('border', '');
+  $("#myCard, #enemyCard").hide();
+  $(".my").mouseover(function() {
+    if(cards.indexOf(Number($(this).text().charAt(0))) != -1) {
+      $(this).css({ 'cursor':'pointer', 'transform':'scale(1.5, 1.5)' });
+    }else {
+      $(this).css({ 'cursor':'not-allowed' });
+    }
+  }).mouseleave(function() {
+    $(this).css({ 'cursor':'not-allowed', 'transform':'scale(1, 1)' });
+  });
+
+  $(".my").on('click', function() {
+    $(this).css("border", "2px solid #B49BFF");
+  
+    const cardNumber = Number($(this).text().charAt(0));
+    const index = cards.indexOf(cardNumber);   
+    if(index == -1) return;
+    console.log('round', round);
+    console.log('count', ++count);
+
+    cards.splice(index, 1);
+    console.log(cards);   
+    showCard('myCard', cardNumber);
+    
+    let enemyNumber;
+    while(true) {
+      const random = Math.floor(Math.random() * 5) + 1;
+      if(enemy.indexOf(random) != -1) {
+        enemyNumber = random;
+        enemy.splice(enemy.indexOf(enemyNumber), 1);
+        showCard('enemyCard', enemyNumber);
+        break;
+      }
+    }
+    $(".enemy").each(function() {
+      if(Number($(this).text().charAt(0)) == enemyNumber) {
+        $(this).css("border", "2px solid #B49BFF");
+      } 
+    });
+
+    if(cardNumber > enemyNumber) {
+      myScore++;
+      $('#myResult').text('Win!!').css('color', 'red');
+      $('#enemyResult').text('Lose..').css('color', 'gray');
+    }else if(cardNumber < enemyNumber) {
+      $('#enemyResult').text('Win!!').css('color', 'red');
+      $('#myResult').text('Lose..').css('color', 'gray');
+      enemyScore++;
+    }else {
+      $('#enemyResult').text('Tie..!').css('color', 'gray');
+      $('#myResult').text('Tie..!').css('color', 'gray');
+      myScore++;
+      enemyScore++;
+    }
+    $("#myScore").text(myScore);
+    $("#enemyScore").text(enemyScore);
+      
+    if(cards.length == 0) {
+      console.log('round end');
+      var result;
+      if(myScore > enemyScore) {
+        result = 'You won!!';
+      }else if(myScore < enemyScore) {
+        result = 'You lost...';
+      }else {
+        result = 'You tied..!';
+      }
+      //$("#myScore, #enemyScore").css({'font-size':'15px', 'color':'red', 'transition-duration':'2s'});
+      $("#roundResult").text(result);
+        
+      
+      if(round == 1) {
+        round1 = myScore + ':' + enemyScore + ' ' + result;
+        $("#nextRoundBtn").show();
+      }else if(round == 2) {
+        round2 = myScore + ':' + enemyScore + ' ' + result;
+        $("#nextRoundBtn").show();
+      }else if(round == 3) {
+        round3 = myScore + ':' + enemyScore + ' ' + result;
+        $("#myCard, #enemyCard, #result, #nextRoundBtn").hide();
+        $("#round").text('Game Result');
+        $("#myResult, #enemyResult").text("");
+        $("#roundResult").html('[round1] ' + round1 + '<br>' 
+                              + '[round2] ' + round2 + '<br>' 
+                              + '[round3] ' + round3 + '<br>'
+                              + 'Wanna try agian?');
+        $("#playAgainBtn").show();            
+        $("#playBtn").text('play').css('background', '#B49BFF');
+      }
+    }
+  });
+}
+const showCard = (whose, cardNumber) => {
+  switch(cardNumber) {
+    case 1: img = '/img/ant.jpg'; break;
+    case 2: img = '/img/bunny.jpg'; break;
+    case 3: img = '/img/snake.jpg'; break;
+    case 4: img = '/img/tiger.jpg'; break;
+    case 5: img = '/img/dragon.jpg'; break;
+  }
+  $("#" + whose).prop('src', img).show();
 }

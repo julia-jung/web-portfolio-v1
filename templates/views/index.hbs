@@ -301,8 +301,8 @@
       </div>    
     </div>
     <br><br>
-    {{!-- <div class="text-center">
-        <h2>HAVE SOME FUN!</h2><br>
+    <div class="text-center">
+        <h2>TAKE A MOMENT TO HAVE SOME FUN!</h2><br>
         <h4>동물 카드게임</h4>
         <button class="btn btn-default" id="ruleBtn">Game Rule</button>
         <button class="btn btn-default" id="playBtn">Play</button>
@@ -310,7 +310,7 @@
     <div>
       <div class="row">
         <div class="col-xs-5 text-center">
-          <h3>Your Cards</h3>
+          <h3 id="cardTitle">Your Cards</h3>
         </div>
         <div class="col-xs-2"></div>
         <div class="col-xs-5 text-center">
@@ -318,31 +318,42 @@
         </div>
       </div>
       <div class="row slideanim">
-        <div class="col-xs-1 card" style="background-image:url('/img/ant.jpg')">1. 개미</div>
-        <div class="col-xs-1 card" style="background-image:url('/img/bunny.jpg')">2. 토끼</div>
-        <div class="col-xs-1 card" style="background-image:url('/img/snake.jpg')">3. 뱀</div>
-        <div class="col-xs-1 card" style="background-image:url('/img/tiger.jpg')">4. 호랑이</div>
-        <div class="col-xs-1 card" style="background-image:url('/img/dragon.jpg')">5. 드래곤</div>
+        <div class="col-xs-1 card my" style="background-image:url('/img/ant.jpg')">1. 개미</div>
+        <div class="col-xs-1 card my" style="background-image:url('/img/bunny.jpg')">2. 토끼</div>
+        <div class="col-xs-1 card my" style="background-image:url('/img/snake.jpg')">3. 뱀</div>
+        <div class="col-xs-1 card my" style="background-image:url('/img/tiger.jpg')">4. 호랑이</div>
+        <div class="col-xs-1 card my" style="background-image:url('/img/dragon.jpg')">5. 드래곤</div>
         <div class="col-xs-2"></div>
-        <div class="col-xs-1 card" style="background-image:url('/img/ant.jpg')">1. 개미</div>
-        <div class="col-xs-1 card" style="background-image:url('/img/bunny.jpg')">2. 토끼</div>
-        <div class="col-xs-1 card" style="background-image:url('/img/snake.jpg')">3. 뱀</div>
-        <div class="col-xs-1 card" style="background-image:url('/img/tiger.jpg')">4. 호랑이</div>
-        <div class="col-xs-1 card" style="background-image:url('/img/dragon.jpg')">5. 드래곤</div>
+        <div class="col-xs-1 card enemy" style="background-image:url('/img/ant.jpg')">1. 개미</div>
+        <div class="col-xs-1 card enemy" style="background-image:url('/img/bunny.jpg')">2. 토끼</div>
+        <div class="col-xs-1 card enemy" style="background-image:url('/img/snake.jpg')">3. 뱀</div>
+        <div class="col-xs-1 card enemy" style="background-image:url('/img/tiger.jpg')">4. 호랑이</div>
+        <div class="col-xs-1 card enemy" style="background-image:url('/img/dragon.jpg')">5. 드래곤</div>
       </div>
       <br>
       <div class="row slideanim">
-        <div class="col-xs-4 card-area">
-          <img id="myCard" src="">
+        <div class="col-xs-4 my-card-area text-center">
+          <h2 id="myResult"></h2>
+          <img id="myCard" src="" style="display:none">
         </div>
         <div class="col-xs-4 text-center">
+          <h2 id="round"></h2>
+          <p id="result">
+            <span id="myScore"></span>
+            <span>:</span>
+            <span id="enemyScore"></span>
+          </p>
+          <p id="roundResult"></p>
+          <button class="btn btn-default" style="display:none" id="nextRoundBtn">Next Round</button>
+          <button class="btn btn-default" id="playAgainBtn" style="display:none">Play Again</button>
           <h3>VS</h3>
         </div>
-        <div class="col-xs-4 card-area">
-          <img id="enemyCard" src="/img/bunny.jpg">
+        <div class="col-xs-4 enemy-card-area text-center">
+          <h2 id="enemyResult"></h2>
+          <img id="enemyCard" src="" style="display:none">
         </div>
       </div>
-    </div> --}}
+    </div>
   </div>
 
 
