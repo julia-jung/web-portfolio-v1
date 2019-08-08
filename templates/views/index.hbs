@@ -358,63 +358,88 @@
         </div>      
       </div>    
     </div>
-    <br><br>
+  </div>
+  <br><br>
+  <div id="animalGame" class="container-fluid">
     <div class="text-center">
         <h2>TAKE A MOMENT TO HAVE SOME FUN!</h2><br>
         <h4>동물 카드게임</h4>
-        <button class="btn btn-default" id="ruleBtn">Game Rule</button>
+        <button class="btn btn-default" id="ruleBtn"
+        data-toggle="modal" data-target="#gameRuleModal">Game Rule</button>
         <button class="btn btn-default" id="playBtn">Play</button>
     </div>
-    <div>
-      <div class="row">
-        <div class="col-xs-5 text-center">
-          <h3 id="cardTitle">Your Cards</h3>
-        </div>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-5 text-center">
-          <h3>Enemy's Cards</h3>
+    <div id="gameRuleModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">동물카드게임 Rule</h4>
+          </div>
+          <div class="modal-body">
+            <ul>
+                <li>Welcome to Animal Card Game!</li>
+                <li>You and your enemy will each have 5 animal cards.</li>
+                <li>which are 1. Ant/ 2. Bunny/ 3, Snake/ 4. Tiger/ 5.Dragon</li>
+                <li>A card with higher number wins the lower.</li>
+                <li>For Example 2. Bunny wins only 1. Ant, 5. Dragon wins the rest of all.</li>
+                <li>When the game start, just pick one of your card to put</li>
+                <li>As soon as you pick your card, the enemy will show his card.</li>
+                <li>Be careful, if you win the enemy's Ant with your Dragon card, even if you won its not good.</li>
+                <li>Each game have 3 rounds, Wish you luck!</li>
+                <li>If you're ready, go back and press play Button!</li>
+              </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
-      <div class="row slideanim">
-        <div class="col-xs-1 card my" style="background-image:url('/img/ant.jpg')">1. 개미</div>
-        <div class="col-xs-1 card my" style="background-image:url('/img/bunny.jpg')">2. 토끼</div>
-        <div class="col-xs-1 card my" style="background-image:url('/img/snake.jpg')">3. 뱀</div>
-        <div class="col-xs-1 card my" style="background-image:url('/img/tiger.jpg')">4. 호랑이</div>
-        <div class="col-xs-1 card my" style="background-image:url('/img/dragon.jpg')">5. 드래곤</div>
-        <div class="col-xs-2"></div>
-        <div class="col-xs-1 card enemy" style="background-image:url('/img/ant.jpg')">1. 개미</div>
-        <div class="col-xs-1 card enemy" style="background-image:url('/img/bunny.jpg')">2. 토끼</div>
-        <div class="col-xs-1 card enemy" style="background-image:url('/img/snake.jpg')">3. 뱀</div>
-        <div class="col-xs-1 card enemy" style="background-image:url('/img/tiger.jpg')">4. 호랑이</div>
-        <div class="col-xs-1 card enemy" style="background-image:url('/img/dragon.jpg')">5. 드래곤</div>
-      </div>
-      <br>
-      <div class="row slideanim">
-        <div class="col-xs-4 my-card-area text-center">
-          <h2 id="myResult"></h2>
+    </div>
+    <br>
+    <div class="row slideanim game-wrapper">
+      <div class="my-panel col-xs-6 text-center">
+        <h3 id="cardTitle">YOUR CARDS</h3>
+        <div class="my-card-box row"> 
+          <div class="col-xs-2 card my" style="background-image:url('/img/ant.jpg')">1. 개미</div>
+          <div class="col-xs-2 card my" style="background-image:url('/img/bunny.jpg')">2. 토끼</div>
+          <div class="col-xs-2 card my" style="background-image:url('/img/snake.jpg')">3. 뱀</div>
+          <div class="col-xs-2 card my" style="background-image:url('/img/tiger.jpg')">4. 호랑이</div>
+          <div class="col-xs-2 card my" style="background-image:url('/img/dragon.jpg')">5. 드래곤</div>
+          <div class="col-xs-2"></div>
+        </div>
+        <h2 id="myResult"></h2>
+        <div class="my-card-display row">
           <img id="myCard" src="" style="display:none">
         </div>
-        <div class="col-xs-4 text-center">
-          <h2 id="round"></h2>
-          <p id="result">
-            <span id="myScore"></span>
-            <span>:</span>
-            <span id="enemyScore"></span>
-          </p>
-          <p id="roundResult"></p>
-          <button class="btn btn-default" style="display:none" id="nextRoundBtn">Next Round</button>
-          <button class="btn btn-default" id="playAgainBtn" style="display:none">Play Again</button>
-          <h3>VS</h3>
+      </div>
+      
+      <div class="enemy-panel col-xs-6 text-center">
+        <h3>ENEMY'S CARDS</h3>
+        <div class="enemy-card-box row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-2 card enemy" style="background-image:url('/img/ant.jpg')">1. 개미</div>
+          <div class="col-xs-2 card enemy" style="background-image:url('/img/bunny.jpg')">2. 토끼</div>
+          <div class="col-xs-2 card enemy" style="background-image:url('/img/snake.jpg')">3. 뱀</div>
+          <div class="col-xs-2 card enemy" style="background-image:url('/img/tiger.jpg')">4. 호랑이</div>
+          <div class="col-xs-2 card enemy" style="background-image:url('/img/dragon.jpg')">5. 드래곤</div>
         </div>
-        <div class="col-xs-4 enemy-card-area text-center">
-          <h2 id="enemyResult"></h2>
+        <h2 id="enemyResult"></h2>
+        <div class="enemy-card-display row">
           <img id="enemyCard" src="" style="display:none">
         </div>
       </div>
+      <h2 id="round"></h2>
+      <p id="result">
+        <span id="myScore"></span>
+        <span>:</span>
+        <span id="enemyScore"></span>
+      </p>
+      <p id="roundResult"></p>
+      <button class="btn btn-default" style="display:none" id="nextRoundBtn">Next Round</button>
+      <button class="btn btn-default" id="playAgainBtn" style="display:none">Play Again</button>
+      <h3 id="vs">VS</h3>
     </div>
+      
   </div>
-
-
   
   <div id="contact" class="container-fluid bg-grey">
     <h2 class="text-center">CONTACT</h2>

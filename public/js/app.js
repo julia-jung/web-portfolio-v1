@@ -30,7 +30,7 @@ $(document).ready(function(){
       }
     });
 
-    getWeather();
+    //getWeather();
 
     $("#address").on('change', () => {
       $("#location").text("");
@@ -148,12 +148,13 @@ const play = (round, callback) => {
   let myScore = 0;
   let enemyScore = 0;
   let count = 0;
-  $("#cardTitle").text('Choose Your Card!').css('color', 'red');
+  $("#cardTitle").text('PICK YOUR CARD!').css('color', 'red');
   $("#nextRoundBtn, #playAgainBtn").hide();
   $("#playBtn").text('Start!').css('background', 'red');
   $("#round").text('Round ' + round).css({'color':'#B49BFF', 'transform-scale':'scale(1.4, 1.4)', 'transition-duration':'2s'});
   //$("#round").text('Round' + round);
-  $("#result").show();
+  $("#result").show().css('font-size', '2em');
+  $("#vs").show();
   $("#myScore, #enemyScore").text(0);
   $("#myResult, #enemyResult, #roundResult").text('');
   $('.card').css('border', '');
@@ -242,9 +243,11 @@ const play = (round, callback) => {
         $("#roundResult").html('[round1] ' + round1 + '<br>' 
                               + '[round2] ' + round2 + '<br>' 
                               + '[round3] ' + round3 + '<br>'
-                              + 'Wanna try agian?');
-        $("#playAgainBtn").show();            
+                              + 'Wanna try agian?').css('font-size', '1em');
+        $("#playAgainBtn").show();
+        $("#vs").hide();           
         $("#playBtn").text('play').css('background', '#B49BFF');
+        
       }
     }
   });
