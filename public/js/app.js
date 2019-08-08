@@ -30,7 +30,7 @@ $(document).ready(function(){
       }
     });
 
-    //getWeather();
+    getWeather();
 
     $("#address").on('change', () => {
       $("#location").text("");
