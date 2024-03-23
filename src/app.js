@@ -17,58 +17,57 @@ app.set('views', viewPath);
 hbs.registerPartials(partialPath);
 app.use(express.static(publicDirectoryPath));
 
-
 app.get('', (req, res) => {
   res.render('index', {
-    title:'portfolio',
-    name:'MINJI JUNG'
+    title: 'portfolio',
+    name: 'MINJI JUNG',
   });
 });
 
 app.get('/mail', (req, res) => {
-    mail(req.query.from, req.query.text, (error, response) => {
-        if(error) {
-            console.log(error);
-            return res.send({ error });
-        }
-        console.log(response);
-        res.send({ response });
-    })
+  mail(req.query.from, req.query.text, (error, response) => {
+    if (error) {
+      console.log(error);
+      return res.send({ error });
+    }
+    console.log(response);
+    res.send({ response });
+  });
 });
 
 app.get('/weather', (req, res) => {
-  if(!req.query.address) {
+  if (!req.query.address) {
     return res.send({
-      error:'Please provide an address'
-    })
+      error: 'Please provide an address',
+    });
   }
-  if(req.query.address == 'geolocation') {
+  if (req.query.address == 'geolocation') {
     forecast(req.query.lat, req.query.lng, (error, forecastData) => {
-      if(error) {
+      if (error) {
         return res.send({
-          error
+          error,
         });
       }
       res.send({
         forecast: forecastData,
         location: 'in your area',
-        address: ''
-      })
+        address: '',
+      });
     });
-  }else {
+  } else {
     geocode(req.query.address, (error, { latitude, longitude, location }) => {
-      if(error) {
+      if (error) {
         return res.send({ error });
       }
       forecast(latitude, longitude, (error, forecastData) => {
-        if(error) {
+        if (error) {
           return res.send({ error });
         }
         res.send({
           forecast: forecastData,
           location,
-          address: req.query.address
-        })
+          address: req.query.address,
+        });
       });
     });
   }

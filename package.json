@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "nodemon": "^1.2.0"
+  },
+  "overrides": {
+    "graceful-fs": "^4.2.11"
   }
 }
