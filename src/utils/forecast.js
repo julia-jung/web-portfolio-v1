@@ -8,10 +8,10 @@ const forecast = (latitude, longitude, callback) => {
     longitude +
     '?units=si&lang=ko';
 
-  request({ url, json: true }, (error, { body }) => {
+  request({ url, json: true }, (error, res) => {
     if (error) {
       callback('Unable to connect weather service!', undefined);
-    } else if (body.error) {
+    } else if (res && res.body && body.error) {
       callback('Unable to find location!', undefined);
     } else {
       callback(undefined, {
